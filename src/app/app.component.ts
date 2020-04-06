@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `<h1>hello {{msg}}!</h1>
+  <app-user *ngFor="let u of users" [user]="u"></app-user>
+  `,
+  styles: [`h1 {
+    background: silver
+  }`]
 })
 export class AppComponent {
-  title = 'ngOct2019';
+  msg = 'users';
+  users: UserModel[];
+
+  constructor(private userService: UserService) {
+    this.userService.getUsers().subscribe(value => this.users = value);
+
+  }
+
+
 }
