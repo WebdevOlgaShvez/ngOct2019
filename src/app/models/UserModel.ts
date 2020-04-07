@@ -6,6 +6,7 @@ class UserModel {
   email: string;
   phone: string;
   website: string;
+  posts: PostModel[] = [];
 
 
 }

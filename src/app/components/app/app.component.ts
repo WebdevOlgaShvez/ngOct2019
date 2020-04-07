@@ -11,16 +11,42 @@ import {CommentService} from '../../services/comment/comment.service';
 })
 export class AppComponent {
   msg = 'users';
-  users: UserModel[];
-  posts: PostModel[];
-  comments: CommentModel[];
+  users: UserModel[] = [];
+
 
   constructor(private userService: UserService,
               private postService: PostService,
               private commentService: CommentService) {
-    this.userService.getUsers().subscribe(value => this.users = value);
-    this.postService.getPosts().subscribe(value => this.posts = value);
-    this.commentService.getComments().subscribe(value => this.comments = value);
+    this.userService.getUsers().subscribe(users => {
+
+      this.postService.getPosts().subscribe(posts => {
+        this.commentService.getComments().subscribe(comments => {
+
+
+          for (const user of users) {
+            user.posts = [];
+            for (const post of posts) {
+              if (post.userId === user.id) {
+                post.comments = [];
+                for (const comment of comments) {
+                  if (comment.postId === post.id) {
+                    post.comments.push(comment);
+                  }
+                }
+                user.posts.push(post);
+              }
+            }
+            this.users.push(user);
+          }
+          console.log(this.users);
+
+
+        });
+      });
+
+
+    });
+
 
   }
 
