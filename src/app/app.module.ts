@@ -14,7 +14,7 @@ const routes: Routes = [
   // locahost:4200/ -> hello component
   {path: '', component: HelloComponent},
   // localhos:4200/users ->all Users Cpmponent
-  {path: 'users', component: AllUsersComponent, resolve: {allUsers : UserResolverService}}
+  {path: 'users', component: AllUsersComponent, resolve: {allUsers : UserResolverService}},
 ];
 
 @NgModule({
