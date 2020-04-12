@@ -7,19 +7,12 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  API = 'https://jsonplaceholder.typicode.com/';
+  constructor(private httpClient: HttpClient) {
   }
 
-  getUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>('https://jsonplaceholder.typicode.com/users');
-  }
+  getAllData(): Observable<UserModel[]> {
+    return this.httpClient.get<UserModel[]>(this.API + 'users');
 
-  getUser(id: number) {
-    return this.http.get<UserModel[]>(`https://jsonplaceholder.typicode.com/users/${id}`);
-
-  }
-
-  getAuthUsers() {
-    return this.http.get<UserModel[]>(`https://jsonplaceholder.typicode.com/users`);
   }
 }

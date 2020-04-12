@@ -5,10 +5,12 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
+export class UserComponent implements OnInit{
+  ngOnInit(): void {
+  }
 
   @Input()
-  user: UserModel;
+  user: UserModel[];
 
   constructor() {
   }

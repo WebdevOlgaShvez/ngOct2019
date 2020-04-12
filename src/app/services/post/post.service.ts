@@ -6,11 +6,14 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  constructor(private http: HttpClient) {
+  API = 'https://jsonplaceholder.typicode.com/';
+
+  constructor(private httpClient: HttpClient) {
   }
 
-  getPosts(): Observable<PostModel[]> {
-    return this.http.get<PostModel[]>('https://jsonplaceholder.typicode.com/posts');
-  }
+  getAllData(): Observable<PostModel[]> {
+    console.log(this.httpClient.get<PostModel[]>(this.API + 'posts'));
+    return this.httpClient.get<PostModel[]>(this.API + 'posts');
 
+  }
 }

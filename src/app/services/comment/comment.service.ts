@@ -8,11 +8,14 @@ import {Observable} from 'rxjs';
 export class CommentService {
 
 
-  constructor(private http: HttpClient) {
+  API = 'https://jsonplaceholder.typicode.com/';
+
+  constructor(private httpClient: HttpClient) {
   }
 
-  getComments(): Observable<CommentModel[]> {
-    return this.http.get<CommentModel[]>('https://jsonplaceholder.typicode.com/comments');
+  getAllData(): Observable<CommentModel[]> {
+    return this.httpClient.get<CommentModel[]>(this.API + 'comments');
+
   }
 
 }

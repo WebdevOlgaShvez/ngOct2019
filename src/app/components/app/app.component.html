@@ -1,8 +1,8 @@
-<h1>hello {{msg}}!</h1>
-<app-user *ngFor="let u of users" [user]="u"></app-user>
-<hr>
-
-<app-post *ngFor="let singlePost of posts" [post]="singlePost"></app-post>
-<hr>
-
-<app-comment *ngFor="let singleComment of comments" [comment]="singleComment"></app-comment>
+<a routerLink="/">home</a>
+<br>
+<a routerLink="users">users</a>
+<br>
+<a routerLink="posts">posts</a>
+<br>
+<a routerLink="comments">comments</a>
+<router-outlet></router-outlet>

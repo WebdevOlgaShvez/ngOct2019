@@ -8,12 +8,12 @@ import {Component, Input, OnInit} from '@angular/core';
 export class PostComponent implements OnInit {
 
   @Input()
-  post: PostModel;
+  post: PostModel[];
 
   constructor() {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
