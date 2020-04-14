@@ -6,11 +6,11 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit{
-  ngOnInit(): void {
+  ngOnInit(){
   }
 
   @Input()
-  user: UserModel[];
+  user: UserModel;
 
   constructor() {
   }
