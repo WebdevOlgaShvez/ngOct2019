@@ -17,5 +17,9 @@ export class CommentService {
     return this.httpClient.get<CommentModel[]>(this.API + 'comments');
 
   }
+  getCommentsPosts(id):Observable<CommentModel[]>{
+    console.log(this.httpClient.get<CommentModel[]>(this.API + `comments?postId=${id}`))
+    return this.httpClient.get<CommentModel[]>(this.API + `comments?postId=${id}`);
+  }
 
 }

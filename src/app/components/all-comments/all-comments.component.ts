@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {CommentService} from "../../services/comment/comment.service";
 
 @Component({
   selector: 'app-all-comments',
@@ -9,11 +10,26 @@ import {ActivatedRoute} from "@angular/router";
 export class AllCommentsComponent implements OnInit {
   comments: CommentModel[];
 
-  constructor(private  activatedRoute: ActivatedRoute) {
-    this.comments = this.activatedRoute.snapshot.data.list
+  constructor(private commentService: CommentService, private  activatedRoute: ActivatedRoute) {
+
+
+    try {
+      this.comments = this.activatedRoute.snapshot.data.comments;
+    } catch (e) {
+      console.log(e);
+    }
+
+    this.activatedRoute.params
+      .subscribe(value => {
+        if (!!value.id) {
+          this.commentService.getCommentsPosts(value.id).subscribe(comments => {
+            this.comments = comments;
+          });
+        }
+      });
   }
 
   ngOnInit() {
   }
-
 }
+

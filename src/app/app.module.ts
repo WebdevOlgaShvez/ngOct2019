@@ -12,15 +12,25 @@ import {AllPostsComponent} from "./components/all-posts/all-posts.component";
 import {AllUsersComponent} from "./components/all-users/all-users.component";
 import {HelloComponent} from "./components/hello/hello.component";
 import {UserResolverService} from "./services/resolvers/user-resolver.service";
+import {CommentResolverService, CommentsResolverService} from "./services/resolvers/comment-resolver.service";
 import {PostResolverService} from "./services/resolvers/post-resolver.service";
-import {CommentResolverService} from "./services/resolvers/comment-resolver.service";
 
 
 const routes = [
   {path: '', component: HelloComponent},
-  {path: 'users', component: AllUsersComponent, resolve: {list: UserResolverService } },
-  {path: 'posts', component: AllPostsComponent, resolve: {list: PostResolverService  } },
-  {path: 'comments', component: AllCommentsComponent, resolve: {list: CommentResolverService } }
+  {path: 'users', component: AllUsersComponent, resolve: {list: UserResolverService },
+    children: [
+      //users/:id/posts
+    {path: ':id/posts', component: AllPostsComponent, children: [
+        {path: ':id/comments', component: AllCommentsComponent}]}
+    ]},
+  {path: 'posts', component: AllPostsComponent, resolve: {list: PostResolverService  },
+    children: [
+      {path: ':id/comments', component: AllCommentsComponent}] },
+  {
+    path: 'comments', component: AllCommentsComponent, resolve: {comments: CommentResolverService}, /*children: [
+      {path: ':xxx/post', component: PostComponent}]*/
+  }
 ];
 @NgModule({
   declarations: [

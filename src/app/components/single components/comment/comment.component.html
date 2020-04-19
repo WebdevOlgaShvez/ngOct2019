@@ -1,7 +1,17 @@
 <div>
-  <div>{{comment.id}}</div>
-  <div>{{comment.postId}}</div>
-  <div>{{comment.name}}</div>
-  <div>{{comment.email}}</div>
-  <div>{{comment.body}}</div>
+  <div>{{comment?.id}}</div>
+  <div>{{comment?.postId}}</div>
+  <div>{{comment?.name}}</div>
+  <div>{{comment?.email}}</div>
+  <div>{{comment?.body}}</div>
+  <button (click)="navigate(comment)">show post this comment</button>
+  <div>
+    <blockquote>{{post?.id}}</blockquote>
+    <blockquote>{{post?.title}}</blockquote>
+    <blockquote>{{post?.body}}</blockquote>
+    <blockquote>{{post?.userId}}</blockquote>
+
+  </div>
+  <hr>
 </div>
+<!--<router-outlet></router-outlet>-->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {PostService} from "../../services/post/post.service";
 
 
 @Component({
@@ -10,10 +11,33 @@ import {ActivatedRoute} from "@angular/router";
 export class AllPostsComponent implements OnInit {
   posts: PostModel[];
 
-  constructor(private  activatedRoute: ActivatedRoute) {
+  constructor(private postService: PostService, private  activatedRoute: ActivatedRoute, /*private router: Router*/) {
     console.log(this.activatedRoute.snapshot.data.list);
-    this.posts = this.activatedRoute.snapshot.data.list
+
+// get from resolver
+    try {
+      this.posts = this.activatedRoute.snapshot.data.list;
+    } catch (e) {
+      console.log(e);
+    }
+    // render post of user
+    this.activatedRoute.params  // /users/:id/posts
+      .subscribe(value => {
+        if (!!value.id) {
+          this.postService.getUsersPosts(value.id).subscribe(posts => {
+            this.posts = posts;
+          });
+        }
+      });
+
+
+    /* this.activatedRoute.queryParams.subscribe(query =>
+        this.postService.getPostOfUserById(query.idOfUser).subscribe(value => console.log(value)));*/
+
+   /* this.postService.getPostOfUserById(this.router.getCurrentNavigation().extras.state.user)
+      .subscribe(value => console.log(value));*/
   }
+
 
   ngOnInit() {
   }
